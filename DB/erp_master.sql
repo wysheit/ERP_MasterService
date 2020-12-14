@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 08:34 AM
+-- Generation Time: Dec 14, 2020 at 12:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Table structure for table `employees`
 --
 
-CREATE TABLE `employee` (
+CREATE TABLE `employees` (
   `id` int(11) NOT NULL,
   `employee_code` varchar(50) NOT NULL,
   `first_name` varchar(150) NOT NULL,
@@ -49,10 +49,10 @@ CREATE TABLE `employee` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item`
+-- Table structure for table `items`
 --
 
-CREATE TABLE `item` (
+CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `item_code` varchar(50) NOT NULL,
   `item_name` varchar(50) NOT NULL,
@@ -85,15 +85,15 @@ CREATE TABLE `item_categories` (
 --
 
 --
--- Indexes for table `employee`
+-- Indexes for table `employees`
 --
-ALTER TABLE `employee`
+ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `item`
+-- Indexes for table `items`
 --
-ALTER TABLE `item`
+ALTER TABLE `items`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `item_code` (`item_code`);
 
@@ -108,15 +108,15 @@ ALTER TABLE `item_categories`
 --
 
 --
--- AUTO_INCREMENT for table `employee`
+-- AUTO_INCREMENT for table `employees`
 --
-ALTER TABLE `employee`
+ALTER TABLE `employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `item`
+-- AUTO_INCREMENT for table `items`
 --
-ALTER TABLE `item`
+ALTER TABLE `items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

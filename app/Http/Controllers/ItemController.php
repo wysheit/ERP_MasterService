@@ -100,7 +100,7 @@ class ItemController extends Controller
     }
     public function code_Create()
     {
-        $max_code=DB::select("select item_code  from item  ORDER BY RIGHT(item_code , 10) DESC");
+        $max_code=DB::select("select item_code  from items  ORDER BY RIGHT(item_code , 10) DESC");
         $Regi=null;
         if(sizeof($max_code)==0)
         {

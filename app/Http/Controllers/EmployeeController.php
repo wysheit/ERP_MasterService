@@ -113,7 +113,7 @@ class EmployeeController extends Controller
     }
     public function code_Create()
     {
-        $max_code=DB::select("select employee_code  from employee  ORDER BY RIGHT(employee_code , 10) DESC");
+        $max_code=DB::select("select employee_code  from employees  ORDER BY RIGHT(employee_code , 10) DESC");
         $Regi=null;
         if(sizeof($max_code)==0)
         {
