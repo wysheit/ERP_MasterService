@@ -3,26 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Customer;
+use App\Models\Employee;
 use Illuminate\Validation\Rule;
-use App\Models\CustomerOrderDetails;
-use App\Models\CustomerOrdersHeaders;
-use App\Models\LeadFollowups;
-use App\Models\Leads;
-use App\Models\QuotationDetails;
-use App\Models\QuotationsHeader;
+use App\Models\Item;
+use App\Models\ItemCategories;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Log;
 use DataTables;
 
-class CustomerController extends Controller
+class ItemController extends Controller
 {
     //
-    public function showAllCustomer(Request $request)
+    public function showAllItems(Request $request)
     {
         if ($request->ajax()) {
-            $data = Customer::latest()->get();
+            $data = Item::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -33,13 +29,13 @@ class CustomerController extends Controller
                 ->make(true);
         }
     }
-    public function showOneCustomer($id)
+    public function showOneItems($id)
     {
-        return response()->json(Customer::find($id));
+        return response()->json(Item::find($id));
     }
-    public function getAllCustomer()
+    public function getAllItems()
     {
-        return response()->json(Customer::latest()->get());
+        return response()->json(Item::latest()->get());
     }
     public function create(Request $request)
     {
@@ -50,19 +46,15 @@ class CustomerController extends Controller
            // 'user_id' => 'required|unique:customers',
       //  ]);
         DB::beginTransaction();
-        $client = new Customer();
-        $client->customer_code=$this->code_Create();
-        $client->customer_name  = $request->customer_name;
-        $client->contact_person = $request->contact_person;
-        $client->telephone_1=$request->telephone_1;
-        $client->telephone_2 = $request->telephone_2;
-        $client->email=$request->email;
-        $client->fax=$request->fax;
-        $client->address=$request->address;
-        $client->lead_id=$request->lead_id;
-        $client->save();
+        $items = new Item();
+        $items->item_code=$this->code_Create();
+        $items->item_name  = $request->item_name;
+        $items->item_discription = $request->item_discription;
+        $items->category_id=$request->category_id;
+        $items->is_active = $request->is_active;
+        $items->save();
         DB::commit();
-        return response()->json(['customer' => $client, 'message' => 'CREATED','status'=>200], 200);
+        return response()->json(['item' => $items, 'message' => 'CREATED','status'=>200], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e);
@@ -79,25 +71,21 @@ class CustomerController extends Controller
            // 'user_id' => ['required',Rule::unique('customers')->ignore($id)],
         ]);
         DB::beginTransaction();
-        $client = Customer::where('id',$id)->first();
-        if(isset($client))
+        $items = Item::where('id',$id)->first();
+        if(isset($items))
         {
-        $client->customer_name  = $request->customer_name;
-        $client->contact_person = $request->contact_person;
-        $client->telephone_1=$request->telephone_1;
-        $client->telephone_2 = $request->telephone_2;
-        $client->email=$request->email;
-        $client->fax=$request->fax;
-        $client->address=$request->address;
-        $client->lead_id=$request->lead_id;
-        $client->save();
+            $items->item_name  = $request->item_name;
+            $items->item_discription = $request->item_discription;
+            $items->category_id=$request->category_id;
+            $items->is_active = $request->is_active;
+            $items->save();
         }
         else
         {
         return response()->json(['message' => 'UPDATED Faild','status'=>500], 500);
         }
         DB::commit();
-        return response()->json(['customer'=>$client,'message'=>'UPDATED','status'=>200],200);
+        return response()->json(['item'=>$items,'message'=>'UPDATED','status'=>200],200);
         } catch (\Exception $e) {
         //return error message
         DB::rollBack();
@@ -107,12 +95,12 @@ class CustomerController extends Controller
     }
     public function delete($id)
     {
-        Customer::findOrFail($id)->delete();
+        Item::findOrFail($id)->delete();
         return response('Deleted Successfully', 200);
     }
     public function code_Create()
     {
-        $max_code=DB::select("select customer_code  from customer  ORDER BY RIGHT(customer_code , 10) DESC");
+        $max_code=DB::select("select item_code  from item  ORDER BY RIGHT(item_code , 10) DESC");
         $Regi=null;
         if(sizeof($max_code)==0)
         {
@@ -120,11 +108,11 @@ class CustomerController extends Controller
         }
         else
         {
-            $last_code_no=$max_code[0]->customer_code;
+            $last_code_no=$max_code[0]->item_code;
             //$last_file_no=SalesHeader::where('invoice_number',$last_file_no)->first();
             list($Regi,$new_code) = explode('-', $last_code_no);
         }
-        $new_code='CUS'.'-'.sprintf('%010d', intval($new_code) + 1);
+        $new_code=sprintf('%010d', intval($new_code) + 1);
         return $new_code;
     }
 

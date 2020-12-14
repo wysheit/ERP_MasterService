@@ -18,57 +18,34 @@ $router->get('/', function () use ($router) {
 });
 $router->group(['prefix' => 'api'], function () use ($router) {
 
-    //customer master 
-    $router->group(['prefix' => 'customers'], function () use ($router) {
-    $router->get('all', 'CustomerController@showAllCustomer');
-    $router->get('view/{id}', 'CustomerController@showOneCustomer');
-    $router->get('get-customers', 'CustomerController@getAllCustomer');
-    $router->post('create', 'CustomerController@create');
-    $router->post('update/{id}', 'CustomerController@update');
-    $router->get('delete/{id}', 'CustomerController@delete');
+    //item master 
+    $router->group(['prefix' => 'items'], function () use ($router) {
+    $router->get('all', 'ItemController@showAllItems');
+    $router->get('view/{id}', 'ItemController@showOneItems');
+    $router->get('get-customers', 'ItemController@getAllItems');
+    $router->post('create', 'ItemController@create');
+    $router->post('update/{id}', 'ItemController@update');
+    $router->get('delete/{id}', 'ItemController@delete');
     });
 
-    //Lead Master
-    $router->group(['prefix' => 'leads'], function () use ($router) {
-    $router->get('all', 'LeadsController@showAllLeads');
-    $router->get('view/{id}', 'LeadsController@showOneLead');
-    $router->post('create', 'LeadsController@create');
-    $router->post('update/{id}', 'LeadsController@update');
-    $router->get('delete/{id}', 'LeadsController@delete');
+    //item categories Master
+    $router->group(['prefix' => 'item-categories'], function () use ($router) {
+    $router->get('all', 'ItemCategoriesController@showAllCategories');
+    $router->get('view/{id}', 'ItemCategoriesController@showOneCategories');
+    $router->get('get-categories', 'ItemCategoriesController@getAllCategories');
+    $router->post('create', 'ItemCategoriesController@create');
+    $router->post('update/{id}', 'ItemCategoriesController@update');
+    $router->get('delete/{id}', 'ItemCategoriesController@delete');
     });
 
-    //leads followups
-    $router->group(['prefix' => 'leads-followups'], function () use ($router) {
-    $router->get('all', 'LeadsFollowupsController@showAllLeadFollowups');
-    $router->get('view/{id}', 'LeadsFollowupsController@showOneLeadFollowups');
-    $router->get('get-leads', 'CustomerController@getAllLeads');
-    $router->post('create', 'LeadsFollowupsController@create');
-    $router->post('update/{id}', 'LeadsFollowupsController@update');
-    $router->get('delete/{id}', 'LeadsFollowupsController@delete');
+    //employee Master
+    $router->group(['prefix' => 'employee'], function () use ($router) {
+    $router->get('all', 'EmployeeController@showAllEmployee');
+    $router->get('view/{id}', 'EmployeeController@showOneEmployee');
+    $router->get('get-employee', 'EmployeeController@getAllEmployee');
+    $router->post('create', 'EmployeeController@create');
+    $router->post('update/{id}', 'EmployeeController@update');
+    $router->get('delete/{id}', 'EmployeeController@delete');
     });
-
-    //quotation 
-    $router->group(['prefix' => 'quotation'], function () use ($router) {
-    $router->get('all', 'QuotationController@showAllQuotationHeader');
-    $router->get('header/view/{id}', 'QuotationController@showOneQuotationHeader');
-    $router->get('details/view/{id}', 'QuotationController@showQuotationDetails');
-    $router->post('create', 'QuotationController@create');
-    $router->post('update/{id}', 'QuotationController@update');
-    $router->get('delete/{id}', 'QuotationController@delete');
-    });
-
-    //customer orders
-    $router->group(['prefix' => 'customer-orders'], function () use ($router) {
-    $router->get('all', 'CustomerOrdersController@showAllCusOrdesHeader');
-    $router->get('header/view/{id}', 'CustomerOrdersController@showOneCusOrderHeader');
-    $router->get('details/view/{id}', 'CustomerOrdersController@showCusOrdersDetails');
-    $router->post('create', 'CustomerOrdersController@create');
-    $router->post('update/{id}', 'CustomerOrdersController@update');
-    $router->get('delete/{id}', 'CustomerOrdersController@delete');
-    });
-   
-
-
-
 
 });

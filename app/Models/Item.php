@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LeadFollowups extends Model
+class Item extends Model
 {
-    //
     use SoftDeletes;
-    protected $table = 'lead_followups';
+    protected $table = 'item';
     protected $fillable = [
-        'followed_by','contact_methode','remarks','next_schedule','created_at','updated_at','deleted_at'
+        'item_code','item_name', 'item_discription','category_id','is_active','created_at','updated_at','deleted_at'
     ];
     public $timestamps = true;
     protected $dates = ['deleted_at'];
