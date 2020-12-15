@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 04:55 AM
+-- Generation Time: Dec 15, 2020 at 02:14 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -66,19 +66,12 @@ CREATE TABLE `items` (
   `item_code` varchar(50) NOT NULL,
   `item_name` varchar(50) NOT NULL,
   `item_description` text DEFAULT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_code` varchar(50) NOT NULL,
   `is_active` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `items`
---
-
-INSERT INTO `items` (`id`, `item_code`, `item_name`, `item_description`, `category_id`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '0000000001', 'Test Item', 'item name des', 1, NULL, '2020-12-15 02:05:08', '2020-12-15 02:12:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -101,7 +94,9 @@ CREATE TABLE `item_categories` (
 --
 
 INSERT INTO `item_categories` (`id`, `category_code`, `category_name`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'CAT-0000000001', 'qweqwe', 'on', '2020-12-15 02:24:08', '2020-12-15 02:24:08', NULL);
+(1, 'CAT-0000000001', 'CAT 1', 'on', '2020-12-15 02:24:08', '2020-12-15 11:49:25', NULL),
+(2, 'CAT-0000000002', 'CAT 2', 'on', '2020-12-15 11:32:14', '2020-12-15 11:49:32', NULL),
+(3, 'CAT-0000000003', 'CAT 3', 'on', '2020-12-15 12:58:17', '2020-12-15 12:58:17', NULL);
 
 --
 -- Indexes for dumped tables
@@ -146,7 +141,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `item_categories`
 --
 ALTER TABLE `item_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

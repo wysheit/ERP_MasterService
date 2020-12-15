@@ -97,7 +97,7 @@ class ItemController extends Controller
         $items->item_code=$this->code_Create();
         $items->item_name  = $request->item_name;
         $items->item_description = $request->item_description;
-        $items->category_id=$request->category_id;
+        $items->category_code=$request->category_code;
         $items->is_active = $request->is_active;
         $items->save();
         DB::commit();
@@ -123,7 +123,7 @@ class ItemController extends Controller
         {
             $items->item_name  = $request->item_name;
             $items->item_description = $request->item_description;
-            $items->category_id=$request->category_id;
+            $items->category_code=$request->category_code;
             $items->is_active = $request->is_active;
             $items->save();
         }
