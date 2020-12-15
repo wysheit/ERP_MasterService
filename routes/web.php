@@ -36,6 +36,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('create', 'ItemCategoriesController@create');
         $router->post('update/{id}', 'ItemCategoriesController@update');
         $router->get('delete/{id}', 'ItemCategoriesController@delete');
+        $router->get('new-code', 'ItemCategoriesController@code_Create');
     });
 
     //employee Master

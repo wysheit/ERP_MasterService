@@ -68,9 +68,9 @@ class EmployeeController extends Controller
                 {
                     $Employee['employee_code'] = $item->employee_code;
                     $Employee['first_name'] = $item->first_name.' '.$item->last_name;
-                    $Employee['epf_number'] = $item->epf_number;
                     $Employee['nic'] = $item->nic;
                     $Employee['telephone_1'] = $item->telephone_1;
+                    $Employee['epf_number'] = $item->epf_number;
                     $Employee['action'] = '<button class="edit btn btn-icon btn-success btn-sm mr-2" data-id='.$item->id.'><i class="text-light-50 flaticon-edit"></i></button>';
                     $data[] = $Employee;
                 }

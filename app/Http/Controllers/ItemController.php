@@ -159,7 +159,7 @@ class ItemController extends Controller
             //$last_file_no=SalesHeader::where('invoice_number',$last_file_no)->first();
             list($Regi,$new_code) = explode('-', $last_code_no);
         }
-        $new_code=sprintf('%010d', intval($new_code) + 1);
+        $new_code='ITM'.'-'.sprintf('%010d', intval($new_code) + 1);
         return $new_code;
     }
 
