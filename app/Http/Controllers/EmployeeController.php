@@ -17,17 +17,70 @@ class EmployeeController extends Controller
     //
     public function showAllEmployee(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Employee::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<button class="edit btn btn-icon btn-success btn-sm mr-2" data-id='.$row->id.'><i class="text-light-50 flaticon-edit"></i></button>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+        $columns = array( 
+            0 =>'employee_code', 
+            1 =>'employee_name',
+            2=> 'nic',
+            3=> 'phone',
+        );
+
+        $totalData = Employee::count();
+
+        $totalFiltered = $totalData; 
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        if( empty($request->input('search.value')) ) {            
+            $items = Employee::offset($start)
+                    ->limit($limit)
+                    ->orderBy($order,$dir)
+                    ->get();
+        } else {
+            $search = $request->input('search.value'); 
+
+            $items =  Employee::where('employee_code','LIKE',"%{$search}%")
+                        ->orWhere('first_name', 'LIKE',"%{$search}%")
+                        ->orWhere('last_name', 'LIKE',"%{$search}%")
+                        ->orWhere('nic', 'LIKE',"%{$search}%")
+                        ->orWhere('phone', 'LIKE',"%{$search}%")
+                        ->offset($start)
+                        ->limit($limit)
+                        ->orderBy($order,$dir)
+                        ->get();
+
+            $totalFiltered = Employee::where('employee_code','LIKE',"%{$search}%")
+                            ->orWhere('first_name', 'LIKE',"%{$search}%")
+                            ->orWhere('last_name', 'LIKE',"%{$search}%")
+                            ->orWhere('nic', 'LIKE',"%{$search}%")
+                            ->orWhere('phone', 'LIKE',"%{$search}%")
+                            ->count();
         }
+
+        $data = array();
+        if( !empty($items) ) {
+            foreach ($items as $item)
+                {
+                    $Customer['employee_code'] = $item->employee_code;
+                    $Customer['employee_name'] = $item->first_name.' '.$item->last_name;
+                    $Customer['nic'] = $item->nic;
+                    $Customer['phone'] = $item->phone;
+                    $Customer['action'] = '<button class="edit btn btn-icon btn-success btn-sm mr-2" data-id='.$item->id.'><i class="text-light-50 flaticon-edit"></i></button>';
+                    $data[] = $Customer;
+
+                }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),  
+            "recordsTotal"    => intval($totalData),  
+            "recordsFiltered" => intval($totalFiltered), 
+            "data"            => $data   
+            );
+
+        echo json_encode($json_data); 
     }
     public function showOneEmployee($id)
     {

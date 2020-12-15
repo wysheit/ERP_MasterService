@@ -20,7 +20,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     //item master 
     $router->group(['prefix' => 'items'], function () use ($router) {
-    $router->get('all', 'ItemController@showAllItems');
+    $router->post('all', 'ItemController@showAllItems');
     $router->get('view/{id}', 'ItemController@showOneItems');
     $router->get('get-customers', 'ItemController@getAllItems');
     $router->post('create', 'ItemController@create');
@@ -30,7 +30,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     //item categories Master
     $router->group(['prefix' => 'item-categories'], function () use ($router) {
-    $router->get('all', 'ItemCategoriesController@showAllCategories');
+    $router->post('all', 'ItemCategoriesController@showAllCategories');
     $router->get('view/{id}', 'ItemCategoriesController@showOneCategories');
     $router->get('get-categories', 'ItemCategoriesController@getAllCategories');
     $router->post('create', 'ItemCategoriesController@create');
@@ -40,7 +40,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     //employee Master
     $router->group(['prefix' => 'employee'], function () use ($router) {
-    $router->get('all', 'EmployeeController@showAllEmployee');
+    $router->post('all', 'EmployeeController@showAllEmployee');
     $router->get('view/{id}', 'EmployeeController@showOneEmployee');
     $router->get('get-employee', 'EmployeeController@getAllEmployee');
     $router->post('create', 'EmployeeController@create');
