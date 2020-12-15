@@ -39,7 +39,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     });
 
     //employee Master
-    $router->group(['prefix' => 'employee'], function () use ($router) {
+    $router->group(['prefix' => 'employees'], function () use ($router) {
         $router->post('all', 'EmployeeController@showAllEmployee');
         $router->get('view/{id}', 'EmployeeController@showOneEmployee');
         $router->get('get-employee', 'EmployeeController@getAllEmployee');
