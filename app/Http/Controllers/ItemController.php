@@ -96,7 +96,7 @@ class ItemController extends Controller
         $items = new Item();
         $items->item_code=$this->code_Create();
         $items->item_name  = $request->item_name;
-        $items->item_discription = $request->item_discription;
+        $items->item_description = $request->item_description;
         $items->category_id=$request->category_id;
         $items->is_active = $request->is_active;
         $items->save();
@@ -122,17 +122,17 @@ class ItemController extends Controller
         if(isset($items))
         {
             $items->item_name  = $request->item_name;
-            $items->item_discription = $request->item_discription;
+            $items->item_description = $request->item_description;
             $items->category_id=$request->category_id;
             $items->is_active = $request->is_active;
             $items->save();
         }
         else
         {
-        return response()->json(['message' => 'UPDATED Faild','status'=>500], 500);
+        return response()->json(['message' => 'Failed to update the record!','status'=>500], 500);
         }
         DB::commit();
-        return response()->json(['item'=>$items,'message'=>'UPDATED','status'=>200],200);
+        return response()->json(['item'=>$items,'message'=>'Record successfully updated!','status'=>200],200);
         } catch (\Exception $e) {
         //return error message
         DB::rollBack();

@@ -20,32 +20,32 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     //item master 
     $router->group(['prefix' => 'items'], function () use ($router) {
-    $router->post('all', 'ItemController@showAllItems');
-    $router->get('view/{id}', 'ItemController@showOneItems');
-    $router->get('get-customers', 'ItemController@getAllItems');
-    $router->post('create', 'ItemController@create');
-    $router->post('update/{id}', 'ItemController@update');
-    $router->get('delete/{id}', 'ItemController@delete');
+        $router->post('all', 'ItemController@showAllItems');
+        $router->get('view/{id}', 'ItemController@showOneItems');
+        $router->get('get-customers', 'ItemController@getAllItems');
+        $router->post('create', 'ItemController@create');
+        $router->post('update/{id}', 'ItemController@update');
+        $router->get('delete/{id}', 'ItemController@delete');
     });
 
     //item categories Master
     $router->group(['prefix' => 'item-categories'], function () use ($router) {
-    $router->post('all', 'ItemCategoriesController@showAllCategories');
-    $router->get('view/{id}', 'ItemCategoriesController@showOneCategories');
-    $router->get('get-categories', 'ItemCategoriesController@getAllCategories');
-    $router->post('create', 'ItemCategoriesController@create');
-    $router->post('update/{id}', 'ItemCategoriesController@update');
-    $router->get('delete/{id}', 'ItemCategoriesController@delete');
+        $router->post('all', 'ItemCategoriesController@showAllCategories');
+        $router->get('view/{id}', 'ItemCategoriesController@showOneCategories');
+        $router->get('get-categories', 'ItemCategoriesController@getAllCategories');
+        $router->post('create', 'ItemCategoriesController@create');
+        $router->post('update/{id}', 'ItemCategoriesController@update');
+        $router->get('delete/{id}', 'ItemCategoriesController@delete');
     });
 
     //employee Master
     $router->group(['prefix' => 'employee'], function () use ($router) {
-    $router->post('all', 'EmployeeController@showAllEmployee');
-    $router->get('view/{id}', 'EmployeeController@showOneEmployee');
-    $router->get('get-employee', 'EmployeeController@getAllEmployee');
-    $router->post('create', 'EmployeeController@create');
-    $router->post('update/{id}', 'EmployeeController@update');
-    $router->get('delete/{id}', 'EmployeeController@delete');
+        $router->post('all', 'EmployeeController@showAllEmployee');
+        $router->get('view/{id}', 'EmployeeController@showOneEmployee');
+        $router->get('get-employee', 'EmployeeController@getAllEmployee');
+        $router->post('create', 'EmployeeController@create');
+        $router->post('update/{id}', 'EmployeeController@update');
+        $router->get('delete/{id}', 'EmployeeController@delete');
     });
 
 });

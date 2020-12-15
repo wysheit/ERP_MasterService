@@ -117,7 +117,7 @@ class ItemCategoriesController extends Controller
         ]);
         DB::beginTransaction();
         $categories = ItemCategories::where('id',$id)->first();
-        if(isset($items))
+        if(isset($categories))
         {
             $categories->category_name  = $request->category_name;
             $categories->is_active = $request->is_active;
