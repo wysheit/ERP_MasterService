@@ -129,7 +129,7 @@ class ItemController extends Controller
             $items->item_name  = $request->item_name;
             $items->item_description = $request->item_description;
             $items->category_code=$request->category_code;
-            $item->unit_price=$request->unit_price;
+            $items->unit_price=$request->unit_price;
             $items->is_active = $request->is_active;
             $items->save();
         }
