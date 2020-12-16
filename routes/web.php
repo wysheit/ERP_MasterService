@@ -22,7 +22,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'items'], function () use ($router) {
         $router->post('all', 'ItemController@showAllItems');
         $router->get('view/{id}', 'ItemController@showOneItems');
-        $router->get('get-customers', 'ItemController@getAllItems');
+        $router->get('get-items', 'ItemController@getAllItems');
         $router->post('create', 'ItemController@create');
         $router->post('update/{id}', 'ItemController@update');
         $router->get('delete/{id}', 'ItemController@delete');
