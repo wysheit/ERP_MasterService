@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 02:14 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Dec 16, 2020 at 05:52 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -66,12 +67,20 @@ CREATE TABLE `items` (
   `item_code` varchar(50) NOT NULL,
   `item_name` varchar(50) NOT NULL,
   `item_description` text DEFAULT NULL,
-  `category_code` varchar(50) NOT NULL,
+  `unit_price` float DEFAULT NULL,
+  `category_code` varchar(50) DEFAULT NULL,
   `is_active` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `item_code`, `item_name`, `item_description`, `unit_price`, `category_code`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 'ITM-0000000001', 'iphone 12', 'wferge', 5000, 'CAT-0000000003', NULL, '2020-12-16 10:20:53', '2020-12-16 10:20:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -135,7 +144,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `item_categories`

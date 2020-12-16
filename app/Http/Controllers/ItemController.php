@@ -21,6 +21,7 @@ class ItemController extends Controller
             0 =>'item_code', 
             1 =>'item_name',
             2=> 'is_active',
+            3=> 'unit_price',
         );
 
         $totalData = Item::count();
@@ -43,6 +44,7 @@ class ItemController extends Controller
             $items =  Item::where('item_code','LIKE',"%{$search}%")
                         ->orWhere('item_name', 'LIKE',"%{$search}%")
                         ->orWhere('is_active', 'LIKE',"%{$search}%")
+                        ->orWhere('unit_price', 'LIKE',"%{$search}%")
                         ->offset($start)
                         ->limit($limit)
                         ->orderBy($order,$dir)
@@ -51,6 +53,7 @@ class ItemController extends Controller
             $totalFiltered = Item::where('item_code','LIKE',"%{$search}%")
                             ->orWhere('item_name', 'LIKE',"%{$search}%")
                             ->orWhere('is_active', 'LIKE',"%{$search}%")
+                            ->orWhere('unit_price', 'LIKE',"%{$search}%")
                             ->count();
         }
 
@@ -61,6 +64,7 @@ class ItemController extends Controller
                     $Customer['item_code'] = $item->item_code;
                     $Customer['item_name'] = $item->item_name;
                     $Customer['is_active'] = ($item->is_active==1) ? 'Active' : 'inactive';
+                    $Customer['unit_price'] = $item->unit_price;
                     $Customer['action'] = '<button class="edit btn btn-icon btn-success btn-sm mr-2" data-id='.$item->id.'><i class="text-light-50 flaticon-edit"></i></button>';
                     $data[] = $Customer;
 
@@ -98,6 +102,7 @@ class ItemController extends Controller
         $items->item_name  = $request->item_name;
         $items->item_description = $request->item_description;
         $items->category_code=$request->category_code;
+        $items->unit_price=$request->unit_price;
         $items->is_active = $request->is_active;
         $items->save();
         DB::commit();
@@ -124,6 +129,7 @@ class ItemController extends Controller
             $items->item_name  = $request->item_name;
             $items->item_description = $request->item_description;
             $items->category_code=$request->category_code;
+            $item->unit_price=$request->unit_price;
             $items->is_active = $request->is_active;
             $items->save();
         }
