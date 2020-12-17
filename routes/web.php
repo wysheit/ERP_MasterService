@@ -26,6 +26,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('create', 'ItemController@create');
         $router->post('update/{id}', 'ItemController@update');
         $router->get('delete/{id}', 'ItemController@delete');
+        $router->post('autocomplete','ItemController@getAutocomplete');
     });
 
     //item categories Master

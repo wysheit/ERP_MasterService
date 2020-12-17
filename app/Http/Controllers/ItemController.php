@@ -169,4 +169,23 @@ class ItemController extends Controller
         return $new_code;
     }
 
+    public function getAutocomplete(Request $request){
+
+        $search = $request->search;
+  
+        if($search == ''){
+           $autocomplate = Item::orderby('item_name','asc')->select('*')->limit(5)->get();
+        }else{
+           $autocomplate = Item::orderby('item_name','asc')->select('*')->where('item_name', 'like', '%' .$search . '%')->limit(5)->get();
+        }
+  
+        $response = array();
+        foreach($autocomplate as $autocomplate){
+           $response[] = array("value"=>$autocomplate->id,"label"=>$autocomplate->item_name);
+        }
+  
+        echo json_encode($response);
+        exit;
+     }
+
 }
