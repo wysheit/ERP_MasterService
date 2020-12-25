@@ -11,11 +11,13 @@ class Employees extends Model
     protected $table = 'employees';
     protected $fillable = [
         'employee_code',
+        'designation',
         'first_name',
         'last_name', 
         'nic',
         'telephone_1',
         'telephone_2',
+        'fax',
         'address_line_1',
         'address_line_2',
         'city',

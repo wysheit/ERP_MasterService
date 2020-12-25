@@ -48,6 +48,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('create', 'EmployeeController@create');
         $router->post('update/{id}', 'EmployeeController@update');
         $router->get('delete/{id}', 'EmployeeController@delete');
+        $router->post('autocomplete','EmployeeController@getAutocomplete');
     });
 
 });

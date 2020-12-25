@@ -158,7 +158,7 @@ class EmployeeController extends Controller
     }
     public function delete($id)
     {
-        Employee::findOrFail($id)->delete();
+        Employees::findOrFail($id)->delete();
         return response('Deleted Successfully', 200);
     }
     public function code_Create() {
@@ -173,5 +173,26 @@ class EmployeeController extends Controller
         $new_code='EMP'.'-'.sprintf('%010d', intval($new_code) + 1);
         return $new_code;
     }
+    public function getAutocomplete(Request $request){
+
+        $search = $request->search;
+  
+        if($search == ''){
+           $autocomplate = Employees::orderby('first_name','asc')->select('*')->limit(5)->get();
+        }else{
+           $autocomplate = Employees::orderby('first_name','asc')->select('*')
+           ->where('first_name', 'like', '%' .$search . '%')
+           ->orwhere('last_name', 'like', '%' .$search . '%')
+           ->limit(5)->get();
+        }
+  
+        $response = array();
+        foreach($autocomplate as $autocomplate){
+           $response[] = array("value"=>$autocomplate->id,"label"=>$autocomplate->first_name);
+        }
+  
+        echo json_encode($response);
+        exit;
+     }
 
 }
