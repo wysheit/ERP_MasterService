@@ -31,13 +31,13 @@ class ItemController extends Controller
 
         $limit = $request->input('length');
         $start = $request->input('start');
-        $order = $columns[$request->input('order.0.column')];
+        //$order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
         if( empty($request->input('search.value')) ) {            
             $items = Item::offset($start)
                     ->limit($limit)
-                    ->orderBy($order,$dir)
+                   // ->orderBy($order,$dir)
                     ->get();
         } else {
             $search = $request->input('search.value'); 
@@ -48,7 +48,7 @@ class ItemController extends Controller
                         ->orWhere('unit_price', 'LIKE',"%{$search}%")
                         ->offset($start)
                         ->limit($limit)
-                        ->orderBy($order,$dir)
+                       // ->orderBy($order,$dir)
                         ->get();
 
             $totalFiltered = Item::where('item_code','LIKE',"%{$search}%")
@@ -216,6 +216,10 @@ class ItemController extends Controller
      public function getParentItems(){
         return response()->json(Item::where('is_active',1)->where('parent_item',0)->latest()->get());
 
+     }
+
+     public function getItemSerialNumber($id){
+        return response()->json(ItemSerialNumbers::where('item_id',$id)->latest()->get());
      }
 
 }

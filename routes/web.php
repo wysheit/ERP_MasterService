@@ -28,6 +28,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('delete/{id}', 'ItemController@delete');
         $router->post('autocomplete','ItemController@getAutocomplete');
         $router->get('parent-items', 'ItemController@getParentItems');
+        $router->get('get-serial-numbers/{id}', 'ItemController@getItemSerialNumber');
     });
 
     //item categories Master
