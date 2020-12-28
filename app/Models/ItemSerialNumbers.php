@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ItemCategories extends Model
+class ItemSerialNumbers extends Model
 {
     //
     use SoftDeletes;
-    protected $table = 'item_categories';
+    protected $table = 'item_serial_numbers';
     protected $fillable = [
-        'category_code','category_name','is_active','parent_categories','created_at','updated_at','deleted_at'
+        'item_id','serial_no','is_active','created_at','updated_at','deleted_at'
     ];
     public $timestamps = true;
     protected $dates = ['deleted_at'];

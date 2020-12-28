@@ -7,6 +7,7 @@ use App\Models\Employee;
 use Illuminate\Validation\Rule;
 use App\Models\Item;
 use App\Models\ItemCategories;
+use App\Models\ItemSerialNumbers;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Log;
@@ -104,7 +105,19 @@ class ItemController extends Controller
         $items->category_code=$request->category_code;
         $items->unit_price=$request->unit_price;
         $items->is_active = $request->is_active;
+        $items->division=$request->division;
+        $items->parent_item=$request->parent_item;
         $items->save();
+
+        if(isset($request->details)){
+                foreach($request->details as $element) {
+                    $Details = new ItemSerialNumbers();
+                    $Details->item_id = $items->id;
+                    $Details->serial_no = $element['serial_number'];
+                    $Details->is_active = $element['is_active'];
+                    $Details->save();
+                }
+        }
         DB::commit();
         return response()->json(['item' => $items, 'message' => 'CREATED','status'=>200], 200);
         } catch (\Exception $e) {
@@ -118,10 +131,10 @@ class ItemController extends Controller
     {
      try
         {
-        $this->validate($request, [
+       // $this->validate($request, [
            // 'client_code' => ['required',Rule::unique('customers')->ignore($id)],
            // 'user_id' => ['required',Rule::unique('customers')->ignore($id)],
-        ]);
+       // ]);
         DB::beginTransaction();
         $items = Item::where('id',$id)->first();
         if(isset($items))
@@ -131,7 +144,19 @@ class ItemController extends Controller
             $items->category_code=$request->category_code;
             $items->unit_price=$request->unit_price;
             $items->is_active = $request->is_active;
+            $items->division=$request->division;
+            $items->parent_item=$request->parent_item;
             $items->save();
+            $deleteData=ItemSerialNumbers::where('item_id',$items->id)->delete();
+            if(isset($request->details)){
+                foreach($request->details as $element) {
+                    $Details = new ItemSerialNumbers();
+                    $Details->item_id = $items->id;
+                    $Details->serial_no = $element['serial_number'];
+                    $Details->is_active = $element['is_active'];
+                    $Details->save();
+                }
+        }
         }
         else
         {
@@ -186,6 +211,11 @@ class ItemController extends Controller
   
         echo json_encode($response);
         exit;
+     }
+    
+     public function getParentItems(){
+        return response()->json(Item::where('is_active',1)->where('parent_item',0)->latest()->get());
+
      }
 
 }
